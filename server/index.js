@@ -5,7 +5,7 @@ import Groq from 'groq-sdk';
 import { Resend } from 'resend';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;  // Render injects PORT automatically
 
 // ── Clients ───────────────────────────────────────────────────────────────────
 const groq = process.env.GROQ_API_KEY && process.env.GROQ_API_KEY !== 'your_groq_api_key_here'
@@ -47,13 +47,16 @@ Keep answers concise (2-4 sentences), friendly, and professional.
 For hiring inquiries, direct them to the contact form.`;
 
 // ── Middleware ────────────────────────────────────────────────────────────────
+const allowedOrigins = [
+  'http://localhost:5173',          // vite dev server
+  'http://127.0.0.1:5173',         // vite dev server alt
+  'http://localhost',               // docker nginx (port 80)
+  'http://localhost:80',            // docker nginx explicit port
+  /\.onrender\.com$/,              // any *.onrender.com (Render deployment)
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173',   // vite dev server
-    'http://127.0.0.1:5173',  // vite dev server alt
-    'http://localhost',        // docker nginx (port 80)
-    'http://localhost:80',     // docker nginx explicit port
-  ],
+  origin: allowedOrigins,
   methods: ['GET', 'POST'],
   credentials: true,
 }));
