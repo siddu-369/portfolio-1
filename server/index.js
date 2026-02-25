@@ -48,7 +48,12 @@ For hiring inquiries, direct them to the contact form.`;
 
 // ── Middleware ────────────────────────────────────────────────────────────────
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: [
+    'http://localhost:5173',   // vite dev server
+    'http://127.0.0.1:5173',  // vite dev server alt
+    'http://localhost',        // docker nginx (port 80)
+    'http://localhost:80',     // docker nginx explicit port
+  ],
   methods: ['GET', 'POST'],
   credentials: true,
 }));

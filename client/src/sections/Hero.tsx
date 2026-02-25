@@ -3,7 +3,7 @@ import { ArrowDown, Download, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ResumeModal } from '@/components/ResumeModal'
 
-const roles = ['Full-Stack Developer', 'React Enthusiast', 'UI/UX Tinkerer', 'Open-Source Advocate']
+const roles = ['Full-Stack Developer', 'Tech Enthusiast', 'UI/UX Tinkerer', 'DevOps Practitioner', "AI Integrator", "Cloud Explorer"]
 
 export function Hero() {
   const [roleIndex, setRoleIndex] = useState(0)

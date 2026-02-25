@@ -43,7 +43,7 @@ export function Navbar() {
               <Code2 className="w-4 h-4 text-white" />
             </div>
             <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              Portfolio
+              Siddu Siddhardha
             </span>
           </button>
 

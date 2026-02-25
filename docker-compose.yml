@@ -1,0 +1,30 @@
+services:
+  # ── Backend: Node.js / Express ────────────────────────────────────────────
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: portfolio-server
+    env_file:
+      - ./server/.env        # GROQ_API_KEY, RESEND_API_KEY, EMAIL_TO, PORT
+    expose:
+      - "5000"               # internal only — nginx proxies to this
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Frontend: Vite build → nginx ───────────────────────────────────────────
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: portfolio-client
+    ports:
+      - "80:80"              # your portfolio at http://localhost
+    depends_on:
+      server:
+        condition: service_healthy
+    restart: unless-stopped
