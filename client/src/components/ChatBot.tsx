@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Bot, X, Send, Minimize2, Sparkles, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { API_BASE } from '@/config'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -59,7 +60,7 @@ export function ChatBot() {
     setError(null)
 
     try {
-      const res = await fetch('/api/chat', {
+      const res = await fetch(`${API_BASE}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

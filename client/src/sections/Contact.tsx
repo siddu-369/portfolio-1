@@ -3,6 +3,7 @@ import { Send, CheckCircle, AlertCircle, Mail, Github, Linkedin, Twitter } from 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { API_BASE } from '@/config'
 
 interface FormState {
   name: string
@@ -52,7 +53,7 @@ export function Contact() {
 
     setStatus('loading')
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch(`${API_BASE}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
